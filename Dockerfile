@@ -1,3 +1,3 @@
 FROM archlinux:latest
-RUN pacman -Syu
-RUN pacman -S archiso
+RUN pacman -Syu --noconfirm
+RUN pacman -S archiso --noconfirm
