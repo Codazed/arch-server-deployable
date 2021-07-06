@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build ISO') {
             steps {
-                sh 'docker run --privileged -v ${WORKSPACE}/artifacts:/artifacts ${JOB_NAME} /usr/bin/mkarchiso -v -o /artifacts ./config'
+                sh 'docker run --privileged -v ${WORKSPACE}/artifacts:/artifacts -v ${WORKSPACE}/config:/iso-config ${JOB_NAME} /usr/bin/mkarchiso -v -o /artifacts /iso-config'
                 archiveArtifacts artifacts: 'artifacts/*.iso', followSymlinks: false
             }
         }
