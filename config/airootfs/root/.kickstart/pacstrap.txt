@@ -1,0 +1,5 @@
+base
+base-devel
+linux-hardened
+linux-hardened-headers
+linux-firmware
