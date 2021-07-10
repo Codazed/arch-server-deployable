@@ -1,1 +1,2 @@
-bash .kickstart/install.sh
+cd /root/.kickstart
+bash install.sh
