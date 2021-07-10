@@ -5,7 +5,7 @@ partition_efi() {
   log_info "Creating new GPT partition table"
   parted /dev/sda mklabel gpt 
   log_info "Creating ESP partition"
-  parted /dev/sda mkpart "EFI system partition" fat32 1MiB 512MiB
+  parted /dev/sda mkpart "EFI" fat32 1MiB 512MiB
   parted /dev/sda set 1 esp on
   log_info "Creating Swap partition"
   parted /dev/sda mkpart "Swap" linux-swap 512MiB 4.5GiB
