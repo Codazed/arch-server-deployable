@@ -25,7 +25,7 @@ log_info "Running post-install scripts"
 for script in $(find post-install-scripts -type f)
 do
   log_info "-$(basename $script)"
-  cat $script | arch-chroot /mnt EFI=$efisys bash
+  cat $script | arch-chroot /mnt bash
   log_pass "+$(basename $script)"
 done
 log_pass "Finished running post-install scripts"
