@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $(ls /sys/firmware/efi/efivars 2>/dev/null) ]]; then
+  efisys=true
+else
+  efisys=false
+fi
+
 partition_efi() {
   log_info "Partitioning /dev/sda..."
   log_info "Creating new GPT partition table"
