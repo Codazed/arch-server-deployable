@@ -1,4 +1,4 @@
 #!/bin/bash
-git clone https://aur.archlinux.org/paru.git /root/paru
-cd /root/paru
-makepkg -si
+git clone https://aur.archlinux.org/paru.git /tmp/paru
+cd /tmp/paru
+su nobody -c "makepkg -si"
