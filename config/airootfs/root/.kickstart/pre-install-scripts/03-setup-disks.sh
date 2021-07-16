@@ -18,7 +18,6 @@ partition_efi() {
   parted /dev/sda set 2 swap on
   log_info "Creating Root partition"
   parted /dev/sda mkpart "Root" xfs 4.5GiB 100%
-  parted /dev/sda set 3 root on
 }
 
 partition_mbr() {
