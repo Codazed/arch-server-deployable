@@ -6,56 +6,58 @@ else
   efisys=false
 fi
 
+firstdisk=$(lsblk | grep disk | head -n 1 | cut -d ' ' -f 1)
+
 partition_efi() {
-  log_info "Partitioning /dev/sda..."
+  log_info "Partitioning /dev/${firstdisk}..."
   log_info "Creating new GPT partition table"
-  parted /dev/sda mklabel gpt 
+  parted /dev/${firstdisk} mklabel gpt 
   log_info "Creating ESP partition"
-  parted /dev/sda mkpart "EFI" fat32 1MiB 512MiB
-  parted /dev/sda set 1 esp on
+  parted /dev/${firstdisk} mkpart "EFI" fat32 1MiB 512MiB
+  parted /dev/${firstdisk} set 1 esp on
   log_info "Creating Swap partition"
-  parted /dev/sda mkpart "Swap" linux-swap 512MiB 4.5GiB
-  parted /dev/sda set 2 swap on
+  parted /dev/${firstdisk} mkpart "Swap" linux-swap 512MiB 4.5GiB
+  parted /dev/${firstdisk} set 2 swap on
   log_info "Creating Root partition"
-  parted /dev/sda mkpart "Root" xfs 4.5GiB 100%
+  parted /dev/${firstdisk} mkpart "Root" xfs 4.5GiB 100%
 }
 
 partition_mbr() {
-  log_info "Partitioning /dev/sda..."
+  log_info "Partitioning /dev/${firstdisk}..."
   log_info "Creating new DOS partition table"
-  parted /dev/sda mklabel msdos
+  parted /dev/${firstdisk} mklabel msdos
   log_info "Creating Swap partition"
-  parted /dev/sda mkpart primary linux-swap 1MiB 4GiB
+  parted /dev/${firstdisk} mkpart primary linux-swap 1MiB 4GiB
   log_info "Creating Root partition"
-  parted /dev/sda mkpart primary xfs 4GiB 100%
-  parted /dev/sda set 1 boot on
+  parted /dev/${firstdisk} mkpart primary xfs 4GiB 100%
+  parted /dev/${firstdisk} set 1 boot on
 }
 
 format_efi() {
-  log_info "Formatting partitions on /dev/sda..."
-  mkfs.fat /dev/sda1
-  mkswap /dev/sda2
-  mkfs.xfs /dev/sda3
+  log_info "Formatting partitions on /dev/${firstdisk}..."
+  mkfs.fat /dev/${firstdisk}1
+  mkswap /dev/${firstdisk}2
+  mkfs.xfs /dev/${firstdisk}3
 }
 
 format_mbr() {
-  log_info "Formatting partitions on /dev/sda..."
-  mkswap /dev/sda1
-  mkfs.xfs /dev/sda2
+  log_info "Formatting partitions on /dev/${firstdisk}..."
+  mkswap /dev/${firstdisk}1
+  mkfs.xfs /dev/${firstdisk}2
 }
 
 mount_efi() {
   log_info "Mounting partitions..."
-  mount /dev/sda3 /mnt
+  mount /dev/${firstdisk}3 /mnt
   mkdir /mnt/boot
-  mount /dev/sda1 /mnt/boot
-  swapon /dev/sda2
+  mount /dev/${firstdisk}1 /mnt/boot
+  swapon /dev/${firstdisk}2
 }
 
 mount_mbr() {
   log_info "Mounting partitions..."
-  mount /dev/sda2 /mnt
-  swapon /dev/sda1
+  mount /dev/${firstdisk}2 /mnt
+  swapon /dev/${firstdisk}1
 }
 
 if [[ $efisys=="true" ]]; then
