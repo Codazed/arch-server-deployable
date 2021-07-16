@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ $(ls /sys/firmware/efi/efivars 2>/dev/null) ]]; then
-  efisys=true
+  efisys="true"
 else
-  efisys=false
+  efisys="false"
 fi
 
 firstdisk=$(lsblk | grep disk | head -n 1 | cut -d ' ' -f 1)
