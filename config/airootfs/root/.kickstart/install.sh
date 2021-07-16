@@ -34,4 +34,4 @@ log_info "Unmounting file systems"
 umount -R /mnt
 log_success "Arch Linux has been deployed! Restarting system in 10 seconds"
 sleep 10
-reboot
+#reboot
