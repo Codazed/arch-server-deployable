@@ -6,5 +6,5 @@ cat <<EOT >> /etc/hosts
 ::1              localhost
 127.0.1.1        arch-deployed.localdomain arch-deployed
 EOT
-pacman -S dhcpcd
+pacman -S dhcpcd --noconfirm
 systemctl enable dhcpcd

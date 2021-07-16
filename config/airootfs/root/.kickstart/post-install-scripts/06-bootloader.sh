@@ -9,7 +9,7 @@ bootloader_efi() {
 bootloader_mbr() {
   echo "Installing GRUB..."
   firstdisk=$(lsblk | grep disk | head -n 1 | cut -d ' ' -f 1)
-  pacman -S grub
+  pacman -S grub --noconfirm
   grub-install --target=i386-pc /dev/${firstdisk}
   grub-mkconfig -o /boot/grub/grub.cfg
 }

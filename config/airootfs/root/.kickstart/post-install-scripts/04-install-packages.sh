@@ -1,2 +1,2 @@
 #!/bin/bash
-pacman -S - < packages.txt
+pacman -S - --noconfirm < packages.txt
