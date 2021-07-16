@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Pull from SCM') {
             steps {
                 // Get some code from a GitHub repository
