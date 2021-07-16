@@ -1,7 +1,7 @@
 #!/bin/bash
 bootloader_efi() {
   bootctl install
-  sed '/^HOOKS=/ s/)/ systemd)/' /etc/mkinitcpio.conf
+  sed -i '/^HOOKS=/ s/)/ systemd)/' /etc/mkinitcpio.conf
   mkinitcpio -P
 }
 
