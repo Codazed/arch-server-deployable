@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "changeMe!" | passwd --stdin
+echo "root:changeMe!" | chpasswd
