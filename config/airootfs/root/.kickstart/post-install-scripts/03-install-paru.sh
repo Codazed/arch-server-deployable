@@ -1,4 +1,5 @@
 #!/bin/bash
+pacman -S git --noconfirm
 git clone https://aur.archlinux.org/paru.git /tmp/paru
 nobodyshell=$(cat /etc/passwd | grep nobody | cut -d ':' -f 7)
 chsh nobody -s /bin/bash
