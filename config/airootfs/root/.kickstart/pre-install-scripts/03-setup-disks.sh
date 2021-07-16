@@ -58,7 +58,7 @@ mount_mbr() {
   swapon /dev/sda1
 }
 
-if [[ $efisys ]]; then
+if [[ $efisys=="true" ]]; then
   partition_efi
   format_efi
   mount_efi
