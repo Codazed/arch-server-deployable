@@ -32,6 +32,6 @@ log_pass "Finished running post-install scripts"
 sleep 3
 log_info "Unmounting file systems"
 umount -R /mnt
-log_success "Arch Linux has been deployed! Restarting system in 10 seconds"
+log_succ "Arch Linux has been deployed! Restarting system in 10 seconds"
 sleep 10
 #reboot
