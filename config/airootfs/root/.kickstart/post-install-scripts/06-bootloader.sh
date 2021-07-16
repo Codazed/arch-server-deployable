@@ -14,12 +14,6 @@ bootloader_mbr() {
 }
 
 if [[ $(ls /sys/firmware/efi/efivars 2>/dev/null) ]]; then
-  EFI="true"
-else
-  EFI="false"
-fi
-
-if [[ $EFI=="true" ]]; then
   bootloader_efi
 else
   bootloader_mbr

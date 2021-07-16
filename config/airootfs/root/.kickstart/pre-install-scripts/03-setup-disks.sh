@@ -37,13 +37,13 @@ format_efi() {
   log_info "Formatting partitions on /dev/${firstdisk}..."
   mkfs.fat /dev/${firstdisk}1
   mkswap /dev/${firstdisk}2
-  mkfs.xfs /dev/${firstdisk}3
+  mkfs.xfs -f /dev/${firstdisk}3
 }
 
 format_mbr() {
   log_info "Formatting partitions on /dev/${firstdisk}..."
   mkswap /dev/${firstdisk}1
-  mkfs.xfs /dev/${firstdisk}2
+  mkfs.xfs -f /dev/${firstdisk}2
 }
 
 mount_efi() {
@@ -60,7 +60,7 @@ mount_mbr() {
   swapon /dev/${firstdisk}1
 }
 
-if [[ $efisys=="true" ]]; then
+if [[ $efisys = "true" ]]; then
   partition_efi
   format_efi
   mount_efi
