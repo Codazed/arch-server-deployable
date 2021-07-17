@@ -1,2 +1,2 @@
 cd /root/.kickstart
-tmux new -n arch-kickstart "bash install.sh && bash"
+tmux new -n arch-kickstart bash install.sh
