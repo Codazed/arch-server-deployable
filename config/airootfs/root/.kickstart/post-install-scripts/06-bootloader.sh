@@ -11,6 +11,7 @@ bootloader_mbr() {
   firstdisk=$(lsblk | grep disk | head -n 1 | cut -d ' ' -f 1)
   pacman -S grub --noconfirm
   grub-install --target=i386-pc /dev/${firstdisk}
+  sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT=/ s/"$/ console=tty0 console=ttyS0,115200"/' /etc/default/grub
   grub-mkconfig -o /boot/grub/grub.cfg
 }
 
