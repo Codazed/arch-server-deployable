@@ -4,7 +4,7 @@ source ./lib.sh
 log_info "Starting automated install"
 sleep 5
 log_info "Running pre-install scripts"
-for script in $(find pre-install-scripts -iname *.sh -type f)
+for script in $(find pre-install-scripts -iname "*.sh" -type f)
 do
   log_info "-$(basename $script)"
   source $script
@@ -22,7 +22,7 @@ log_info "Generating fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 
 log_info "Running post-install scripts"
-for script in $(find post-install-scripts -iname *.sh -type f)
+for script in $(find post-install-scripts -iname "*.sh" -type f)
 do
   log_info "-$(basename $script)"
   cat $script | arch-chroot /mnt bash
@@ -31,7 +31,7 @@ done
 log_pass "Finished running post-install scripts"
 sleep 3
 log_info "Running post-chroot scripts"
-for script in $(find post-chroot-scripts -iname *.sh -type f)
+for script in $(find post-chroot-scripts -iname "*.sh" -type f)
 do
   log_info "-$(basename $script)"
   source $script
