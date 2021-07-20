@@ -24,6 +24,12 @@ pipeline {
                 archiveArtifacts artifacts: 'artifacts/*.iso', followSymlinks: false
             }
         }
+        stage('Generate Checksum') {
+            steps {
+                sh 'sha256sum ${WORKSPACE}/artifacts/*.iso >> ${WORKSPACE}/artifacts/sha256sum.txt'
+                archiveArtifacts artifacts: 'artifacts/sha256sum.txt', followSymlinks: false
+            }
+        }
     }
     post {
         always {
